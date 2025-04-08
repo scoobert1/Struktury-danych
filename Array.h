@@ -9,6 +9,7 @@ public:
 
   ~Array() { delete[] _arr; }
 
+  // O(n)
   void addToFront(int value) {
     if (_size == _elements_in_array) {
       expand();
@@ -21,10 +22,11 @@ public:
     _arr[0] = value;
     _elements_in_array++;
 
-    std::cout << "Wartosc " << value
-              << " zostala dodana na poczatek tablicy.\n";
+    // std::cout << "Wartosc " << value
+    // << " zostala dodana na poczatek tablicy.\n";
   }
 
+  // O(1)
   void addToEnd(int value) {
     if (_size == _elements_in_array) {
       expand();
@@ -33,9 +35,11 @@ public:
     _arr[_elements_in_array] = value;
     _elements_in_array++;
 
-    std::cout << "Wartosc " << value << " zostala dodana na koniec tablicy.\n";
+    // std::cout << "Wartosc " << value << " zostala dodana na koniec
+    // tablicy.\n";
   }
 
+  // O(n)
   void addAtIndex(int value, int index) {
     if (index < 0 || index > _elements_in_array) {
       return;
@@ -56,8 +60,9 @@ public:
               << ".\n";
   }
 
+  // O(n)
   void removeFromFront() {
-    if (_size == 0) {
+    if (_elements_in_array == 0) {
       std::cout << "Tablica jest pusta.\n";
 
       return;
@@ -72,8 +77,9 @@ public:
     std::cout << "Pierwszy element tablicy zostal usuniety.\n";
   }
 
+  // O(1)
   void removeFromEnd() {
-    if (_size == 0) {
+    if (_elements_in_array == 0) {
       std::cout << "Tablica jest pusta.\n";
 
       return;
@@ -84,8 +90,9 @@ public:
     std::cout << "Ostatni element tablicy zostal usuniety.\n";
   }
 
+  // O(n)
   void removeFromIndex(int index) {
-    if (index > _elements_in_array) {
+    if (index >= _elements_in_array) {
       std::cout << "Indeks poza zakresem.\n";
 
       return;
@@ -101,23 +108,18 @@ public:
               << " zostal usuniety.\n";
   }
 
-  void find(int value) {
-    int count = 0;
-
+  // O(n)
+  int find(int value) {
     for (int i = 0; i < _elements_in_array; i++) {
       if (_arr[i] == value) {
-        std::cout << "Wartosc " << value << " znajduje sie na indexie: " << i
-                  << "\n";
-
-        count++;
+        return i;
       }
     }
 
-    if (count == 0) {
-      std::cout << "Wartosc " << value << " nie znajduje sie w tablicy.\n";
-    }
+    return -1;
   }
 
+  // Do debugowania
   void print() {
     std::cout << "[  ";
 
@@ -133,6 +135,9 @@ private:
   int *_arr;
   int _size;
 
+  // O(n) -> w przypadku, gdy dodamy element do tablicy, lecz jest ona za mala,
+  // to zlozonosc obliczeniowa dodawania do tablicy moze wzrosnac nawet do
+  // O(n^2)
   void expand() {
     _size *= 2;
     int *newArray = new int[_size];

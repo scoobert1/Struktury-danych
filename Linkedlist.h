@@ -2,10 +2,10 @@
 
 class Node {
 public:
-  int data;
+  int number;
   Node *next;
 
-  Node(int val) : data(val), next(nullptr) {}
+  Node(int val) : number(val), next(nullptr) {}
 };
 
 class Linkedlist {
@@ -30,13 +30,14 @@ public:
 
     _head = newNode;
 
-    std::cout << "Wartosc " << value << " zostala dodana na poczatek listy.\n";
+    // std::cout << "Wartosc " << value << " zostala dodana na poczatek
+    // listy.\n";
   }
 
   void addToEnd(int value) {
     Node *newNode = new Node(value);
 
-    std::cout << "Wartosc " << value << " zostala dodana na koniec listy.\n";
+    // std::cout << "Wartosc " << value << " zostala dodana na koniec listy.\n";
 
     if (!_head) {
       _head = newNode;
@@ -143,40 +144,28 @@ public:
     delete temp;
   }
 
-  void find(int value) {
+  int find(int value) {
     Node *current = _head;
 
     int index{0};
-    int count{0};
 
     while (current) {
-      if (current->data == value) {
-        count++;
-
-        // Jezeli wystepuje pierwszy raz
-        if (count == 1) {
-          std::cout << "Wartosc " << value << " wystepuje w wezle: ";
-        }
-
-        std::cout << index << "\t";
+      if (current->number == value) {
+        return index;
       }
 
       current = current->next;
       index++;
     }
 
-    if (count == 0) {
-      std::cout << "Wartosc " << value << " nie znajduje sie w liscie.";
-    }
-
-    std::cout << "\n";
+    return -1;
   }
 
   void print() {
     Node *current = _head;
 
     while (current) {
-      std::cout << current->data << " -> ";
+      std::cout << current->number << " -> ";
       current = current->next;
     }
 
