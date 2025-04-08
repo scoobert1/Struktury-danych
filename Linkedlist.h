@@ -53,7 +53,6 @@ public:
     current->next = newNode;
   }
 
-  // Nie działa
   void addAtIndex(int value, int index) {
     if (index == 0) {
       addToFront(value);
